@@ -1,0 +1,4 @@
+<mat-icon *ngIf="params.rowIndex === undefined && singleton.checkRole(6)" (click)="addItem(-1)"   style="cursor:pointer; margin-top:10px;font-size: 20px;color: #5663FF" >add</mat-icon>
+<mat-icon  *ngIf="params.rowIndex !== undefined && singleton.checkRole(7)"    (click)="deleteItem(params.rowIndex)" style="cursor: pointer;margin-top:20px;font-size: 18px;color: #5663FF">delete</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === true"  style="color: #28a745;font-size: 18px">check_circle_outline</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === false"  style="color: #FF0000;font-size: 18px">highlight_off</mat-icon>

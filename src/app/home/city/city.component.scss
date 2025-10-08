@@ -1,0 +1,72 @@
+.bgdiv{
+  background-color: #eee;
+  border-radius: 10px;
+  margin: 0px;
+  margin-top: 5px;
+  height: calc(100vh - 90px);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;
+}
+.example-margin{
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+
+.example-margin-area{
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+.addCell{
+  width: 60px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #309dcf;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  color:#5663FF;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels {
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar  {
+  background-color: #5663FF;
+}
+
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #5663FF;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #E4E8EB;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}
+
+
+::ng-deep  .mat-checkbox .mat-checkbox-frame {
+  border-color: #999;
+  color: #5663FF;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #5663FF !important;
+}
+
+
+
+
+

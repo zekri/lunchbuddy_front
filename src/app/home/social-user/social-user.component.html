@@ -1,0 +1,37 @@
+<div class="bgloader" *ngIf="loader">
+  <div style="background-color: black; opacity: 0.2; width: 100%; height: 100%; position: absolute; z-index: 9999"></div>
+  <mat-progress-bar mode="indeterminate" color="#3c8dbc" style="background-color: #3c8dbc;height: 3px; z-index: 9999;opacity: 0.5"></mat-progress-bar>
+</div>
+<div class="bgdiv" >
+  <mat-tab-group style="flex: 1;background-color: #fff;  border-radius: 7px;height: 100%" (selectedTabChange)="tabChanged($event)">
+
+    <mat-tab label="Global">
+      <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%; height: 100%;border-radius: 5px"
+          id="myGrid"
+          class="ag-theme-alpine"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [suppressRowClickSelection]="true"
+          [groupSelectsChildren]="true"
+          [debug]="true"
+          [rowSelection]="rowSelection"
+          [rowGroupPanelShow]="rowGroupPanelShow"
+          [pivotPanelShow]="pivotPanelShow"
+          [enableRangeSelection]="true"
+          [rowData]="rowData"
+          [rowHeight]="40"
+          [suppressMenuHide]="true"
+          [paginationAutoPageSize]="false"
+          [pagination]="true"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+
+        ></ag-grid-angular>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

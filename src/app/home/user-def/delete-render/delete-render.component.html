@@ -1,0 +1,3 @@
+<mat-icon  *ngIf="id && singleton.checkRole(44)"    (click)="deleteItem(id)" style="cursor: pointer;font-size: 17px;color: #5663FF">delete</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === true"  style="color: #28a745;font-size: 18px">check_circle_outline</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === false"  style="color: #FF0000;font-size: 18px">highlight_off</mat-icon>

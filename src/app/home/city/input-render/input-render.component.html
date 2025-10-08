@@ -1,0 +1,5 @@
+<mat-form-field appearance="fill" style="margin: 5px; width: 100%">
+  <mat-label>{{title}}</mat-label>
+  <input matInput type="{{type}}" (change)="updateField()"   [(ngModel)]="value" required>
+
+</mat-form-field>

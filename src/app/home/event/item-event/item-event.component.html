@@ -1,0 +1,83 @@
+<div class="divdialog"
+     style="display:block; min-width: 500px; min-height: 400px; border:0; border-radius: 7px">
+  <div style="margin-top: -1px; height: 50px;width: 100%; background-color: #5663FF">
+
+  </div>
+  <div
+    style="color: white; margin: 10px; font-size: 17px; white-space:nowrap; text-overflow: ellipsis; font-weight: 400; margin-right: 30px; position: absolute; top: 5px ">{{ title }}</div>
+  <mat-icon style="color: white; float: right;margin: 8px; right: 5px;  cursor: pointer; position: absolute; top: 5px"
+            mat-dialog-close>close
+  </mat-icon>
+  <div style="overflow-y: scroll;height: 620px;">
+    <diV style="display: flex;margin-left: 10px;  margin-right: 10px; height: 120px;border-radius: 0px 0px 20px 20px; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.3), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+      <img src="{{selectedEvent.restaurant.imagePath}}" style="width: 100%; object-fit: cover;border-radius: 0px 0px 20px 20px;">
+
+    </diV>
+    <div style="display: flex;justify-content: start; align-content: start;font-size: 15px; margin-top: -60px;
+ height: 35px;background-color: #000;opacity: 0;border-radius: 10px; margin-left: 100px; margin-right: 110px; z-index: 9999"></div>
+    <diV style="display: flex;margin-left: 30px;margin-top: -55px;  margin-right: 10px;width: 70px; height: 70px;border-radius: 70px; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.3), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+      <img src="{{selectedEvent.user.picture}}" style="width: 100%; object-fit: cover;border-radius: 70px;">
+
+    </diV>
+    <div style="display: flex;justify-content: start; align-content: start;font-size: 17px; margin-top: -50px; margin-left: 120px;
+ height: 40px;color: white; z-index: 9999">{{selectedEvent.user.name}}</div>
+    <div style="display: flex;justify-content: start; align-content: start;font-size: 15px; margin-top: -20px; margin-left: 120px;
+ height: 40px;color: white; z-index: 9999">{{selectedEvent.user.nameTitle}}</div>
+    <div style="top: 50px;margin-top: 10px;
+background: linear-gradient(180deg, rgba(0,0,0,0.87) 0%, rgba(0,0,0,0) 100%);display: flex; height: 70px;position: absolute;margin-left: 10px; margin-right: 10px;"></div>
+    <div style="top: 50px;
+background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.87) 100%);display: flex; height: 70px;position: absolute;border-radius: 0px 0px 20px 20px;margin-left: 10px; margin-right: 10px;"></div>
+
+
+
+    <div style="display: flex;width: 100%; height: 50px;flex-direction: row">
+      <div style="flex: 1;justify-content: flex-start; align-content: center;font-size: 17px;font-weight: 500; top: 250px;
+color: #333;padding: 20px">{{selectedEvent.restaurant.name}}</div>
+      <img src="assets/staractive.png" style="width: 15px;height:15px;justify-content: flex-end; align-content: center;margin-top: 20px">
+      <div style="width:40px;justify-content: flex-end; align-content: center;font-size: 12px;font-weight: 600; top: 250px;
+color: #333;padding: 10px;margin-right: 20px; margin-top: 10px">{{selectedEvent.restaurant.rate}}</div>
+    </div>
+    <div style="display: flex; font-size: 13px; color: gray;margin-left: 20px; margin-right: 20px">
+      {{selectedEvent.restaurant.vicinity}}
+    </div>
+    <div style="display: flex; font-size: 13px; color: red;margin-left: 20px; margin-right: 20px">
+      Open now <div style="margin-left: 5px; margin-right: 5px;color: gray">daily time</div> 09:30 am to 11:00 pm
+    </div>
+
+    <div style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 10px;margin-bottom: 10px">
+      Description
+    </div>
+    <div style="display: flex; font-size: 13px; color: gray;margin-left: 20px; margin-right: 20px">
+      {{selectedEvent.description}}
+    </div>
+
+    <div style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 10px;margin-bottom: 10px">
+      Member
+    </div>
+    <div style="display: flex; flex-direction: row;margin-left: 10px;margin-right: 10px; margin-bottom: 5px"  *ngFor="let item of selectedEvent.listJoin">
+      <div style="width: 50px;margin-left: 10px">
+        <img src="{{item.user.picture}}" style=" object-fit: cover;width: 40px;height: 40px; border-radius: 40px;margin: 5px">
+      </div>
+      <div style="flex: 1; flex-direction: column">
+        <div style="font-weight: 600;">{{item.user.name}}</div>
+        <div>{{item.user.nameTitle}}</div>
+      </div>
+      <div style="display: flex; flex-direction: row">
+
+        <div *ngIf="item.status === 1" style="margin-top: 10px;margin-bottom: 10px;font-size: 10px;color: white; background-color: orange; padding-top: 5px; width: 100px; border-radius: 15px;text-align: center">Pending</div>
+        <div *ngIf="item.status === 2" style="margin-top: 10px;margin-bottom: 10px;font-size: 10px;color: white; background-color: limegreen; padding-top: 5px;width: 100px; border-radius: 15px;text-align: center">Accepted</div>
+        <div *ngIf="item.status === 3" style="margin-top: 10px;margin-bottom: 10px;font-size: 10px;color: white; background-color: red; padding-top: 5px; width: 100px; border-radius: 15px;text-align: center">Canceled</div>
+      </div>
+    </div>
+
+    <div style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+      Direction
+    </div>
+    <div id="map"  class="mapItem"
+    ></div>
+
+
+
+    <div style="hight:20px"></div>
+  </div>
+</div>

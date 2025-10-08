@@ -1,0 +1,101 @@
+<div class="divdialog"
+     style="display:block; min-width: 800px;height: 600px; border:0; border-radius: 7px">
+  <mat-progress-bar *ngIf="loader" mode="indeterminate" color="#3c8dbc" style="background-color: #3c8dbc;height: 3px; z-index: 9999;opacity: 0.5; position: absolute; margin-top: 52px"></mat-progress-bar>
+
+  <div style="margin-top: -1px; height: 50px;width: 100%; background-color: #5663FF">
+
+  </div>
+  <div
+    style="color: white; margin: 10px; font-size: 17px; white-space:nowrap; text-overflow: ellipsis; font-weight: 400; margin-right: 30px; position: absolute; top: 5px ">{{ title }}</div>
+  <mat-icon style="color: white; float: right;margin: 8px; right: 5px;  cursor: pointer; position: absolute; top: 5px"
+            mat-dialog-close>close
+  </mat-icon>
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+      <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+        <mat-label>Country</mat-label>
+        <mat-select [(value)]="selectedCountry" >
+
+            <mat-option   value="1">HongKong</mat-option>
+
+
+        </mat-select>
+
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+        <mat-label>Type</mat-label>
+        <mat-select [(value)]="selectedType" >
+
+            <mat-option   value="1">Restaurant</mat-option>
+            <mat-option   value="2">Cafee</mat-option>
+
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+    <div style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+      <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+        <mat-label>Restaurant name</mat-label>
+        <input matInput  type="text"  [(ngModel)]="textSearch" required>
+
+      </mat-form-field>
+
+      <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+              (click)="findRestaurant()" [ngStyle]="{'opacity': textSearch.length > 0 && selectedType.length > 0 && selectedCountry.length > 0  ? '1' : '0.5'}"
+              [disabled]="textSearch.length === 0 || selectedType.length === 0 || selectedCountry.length === 0"
+              mat-button>Find</button>
+    </div>
+    <div *ngIf="rowData.length > 0" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+      <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+        <mat-label>Cities</mat-label>
+        <mat-select [(value)]="selectedCity" (selectionChange)="cityChange($event)" >
+<div *ngFor="let city of singleton.listCity">
+          <mat-option   value="{{city.id}}">{{city.name}}</mat-option>
+</div>
+
+        </mat-select>
+
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+        <mat-label>Areas</mat-label>
+        <mat-select [(value)]="selectedArea" (selectionChange)="areaChange()">
+
+          <div *ngFor="let area of listArea">
+          <mat-option   value="{{area.id}}">{{area.name}}</mat-option>
+          </div>
+
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+    <div style="   height: calc(600px - 270px);;overflow: auto;padding: 4px; margin-top: 10px"  >
+      <ag-grid-angular
+        #agGrid
+        style="width: 100%; height: 100%;border-radius: 5px"
+        id="myGrid"
+        class="ag-theme-alpine"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [suppressRowClickSelection]="true"
+        [groupSelectsChildren]="true"
+        [debug]="true"
+        [rowSelection]="rowSelection"
+        [rowGroupPanelShow]="rowGroupPanelShow"
+        [pivotPanelShow]="pivotPanelShow"
+        [enableRangeSelection]="true"
+        [rowData]="rowData"
+        [rowHeight]="40"
+        [suppressMenuHide]="true"
+        [paginationAutoPageSize]="false"
+        [pagination]="true"
+        [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"
+
+      ></ag-grid-angular>
+    </div>
+  </div>
+
+</div>

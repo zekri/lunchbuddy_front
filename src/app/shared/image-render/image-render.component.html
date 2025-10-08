@@ -1,0 +1,6 @@
+<div *ngIf="value != null && value.length > 0 && !isSocial">
+  <img [src]="value" style=" width: 40px; height: 35px; border-radius: 5px;margin-top: -8px;object-fit: cover;" />
+</div>
+<div *ngIf="value != null && value.length > 0 && isSocial">
+  <img [src]="value" style=" width: 15px; height: 15px; border-radius: 20px;margin-top: 0px;object-fit: cover;" />
+</div>

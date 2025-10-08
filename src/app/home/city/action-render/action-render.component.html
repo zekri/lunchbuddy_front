@@ -1,0 +1,4 @@
+<mat-icon *ngIf="params.value === undefined && singleton.checkRole(1)" (click)="openItemUser(-1)"   style="cursor:pointer; margin-top:10px;font-size: 20px;color: #bbc0ff" >add</mat-icon>
+<mat-icon  *ngIf="id && singleton.checkRole(2)"    (click)="openItemUser(id)" style="cursor: pointer;font-size: 15px;color: #5663FF">edit</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === true"  style="color: #28a745;font-size: 18px">check_circle_outline</mat-icon>
+<mat-icon id="icon" *ngIf="!id && status === false"  style="color: #FF0000;font-size: 18px">highlight_off</mat-icon>

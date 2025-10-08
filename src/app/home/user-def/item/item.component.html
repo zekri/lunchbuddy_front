@@ -1,0 +1,60 @@
+<div class="divdialog"
+     style="display:block; min-width: 600px; max-width:700px;height: 600px; border:0; border-radius: 7px">
+  <div style="margin-top: -1px; height: 50px;width: 100%; background-color: #5663FF">
+
+  </div>
+  <div
+    style="color: white; margin: 10px; font-size: 17px; white-space:nowrap; text-overflow: ellipsis; font-weight: 400; margin-right: 30px; position: absolute; top: 5px ">{{ title }}</div>
+  <mat-icon style="color: white; float: right;margin: 8px; right: 5px;  cursor: pointer; position: absolute; top: 5px"
+            mat-dialog-close>close
+  </mat-icon>
+
+
+  <mat-progress-bar *ngIf="loader" mode="indeterminate" color="#5663FF" style="background-color: #3c8dbc">
+  </mat-progress-bar>
+  <div class="example-container" style="margin: 5px;display: flex; flex-direction: column;width: 100%;overflow: auto; height: 480px; padding-bottom: 60px">
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>Login</mat-label>
+      <input matInput type="text"   [(ngModel)]="selectedUser.login" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>First name</mat-label>
+      <input matInput type="text"   [(ngModel)]="selectedUser.firstName" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>Last name</mat-label>
+      <input matInput type="text"   [(ngModel)]="selectedUser.lastName" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>Profile</mat-label>
+      <mat-select [(value)]="selectedUser.idProfile" >
+        <div *ngFor="let profile of singleton.listProfiles">
+          <mat-option   value="{{profile.id}}">{{profile.name}}</mat-option>
+        </div>
+      </mat-select>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>Email</mat-label>
+      <input matInput type="text"   [(ngModel)]="selectedUser.email" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px;width: 90%">
+      <mat-label>Password</mat-label>
+      <input matInput type="password"   [(ngModel)]="selectedUser.password" required>
+
+    </mat-form-field>
+
+
+  </div>
+  <mat-checkbox  (change)="setActive($event)" [checked]="selectedUser.active" style="position: absolute;  cursor: pointer;bottom: 20px; left: 20px ">Active</mat-checkbox>
+  <button class="btn-style" style="background-color: #999; margin-left: 10px; margin-right: 170px;font-size: 12px; float: right"
+          (click)="preview()" mat-button>Cancel</button>
+  <button class="btn-style" #btn style="background-color: #5663FF; margin-left: 10px; margin-right: 40px;font-size: 12px; float: right;color: white"
+          (click)="save()" [ngStyle]="{'opacity': checkData()  ? '1' : '0.5'}"
+          [disabled]="!checkData()"
+          mat-button>Save</button>
+</div>

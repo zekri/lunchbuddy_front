@@ -1,0 +1,131 @@
+<div class="bgloader" *ngIf="loader">
+  <div style="background-color: black; opacity: 0.2; width: 100%; height: 100%; position: absolute; z-index: 9999"></div>
+  <mat-progress-bar mode="indeterminate" color="#3c8dbc" style="background-color: #3c8dbc;height: 3px; z-index: 9999;opacity: 0.5"></mat-progress-bar>
+</div>
+<div class="bgdiv" >
+  <mat-tab-group style="flex: 1;background-color: #fff;  border-radius: 7px;height: 100%" (selectedTabChange)="tabChanged($event)">
+
+    <mat-tab label="Global">
+      <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%; height: 100%;border-radius: 5px"
+          id="myGrid"
+          class="ag-theme-alpine"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [suppressRowClickSelection]="true"
+          [groupSelectsChildren]="true"
+          [debug]="true"
+          [rowSelection]="rowSelection"
+          [rowGroupPanelShow]="rowGroupPanelShow"
+          [pivotPanelShow]="pivotPanelShow"
+          [enableRangeSelection]="true"
+          [rowData]="rowData"
+          [rowHeight]="40"
+          [suppressMenuHide]="true"
+          [paginationAutoPageSize]="false"
+          [pagination]="true"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+
+        ></ag-grid-angular>
+      </div>
+    </mat-tab>
+    <mat-tab label="Map"  *ngIf="singleton.checkRole(5)">
+      <div style="display:flex;width: 100%; height: 100%;overflow: auto;padding-left: 5px; padding-top: 5px; padding-right: 5px">
+        <div id="map"  class="map"
+        >
+          <div style="margin-top: calc(100vh/2 - 70px);height: 1px;background-color: white; width: 100%;justify-content: center;align-content: center;position: absolute;z-index: 999"></div>
+          <div style="margin-left: 50%;width: 1px;background-color: white; height: 100%;justify-content: center;align-content: center;position: absolute;z-index: 999"></div>
+          <div style="margin-left:calc(100vh + 2.5px);margin-top: calc(100vh/2 - 75px);width: 10px;background-color: transparent;border-radius: 10px;border: solid 1px deepskyblue;height: 10px;justify-content: center;align-content: center;position: absolute;z-index: 999"></div>
+
+        </div>
+
+        <div *ngIf="rowData" style="width:250px; height: calc(100vh - 180px); background-color: rgba(255, 255, 255, 0.5); position: absolute;top: 10px;
+    right: 10px;z-index: 9999;float: right;border-radius: 10px 10px 10px 10px;margin-right: 7px; margin-top: 7px ">
+          <input (change)="findCamping($event)" type="text" placeholder="Search ..." style="background-color: white;margin: 10px 10px 10px 10px; border-radius: 10px; width: 220px; padding: 10px;padding-left: 30px" />
+          <mat-icon style="position: inherit;left: 20px;top: 15px;font-size: 17px;color: gray">search</mat-icon>
+          <div style=" height: calc(100vh - 250px);overflow-y: auto; overflow-x: hidden; padding-bottom: 10px">
+            <div *ngFor="let item of displayList"  >
+              <div  (click)="callMarkerPop(item)" style="background-color: white;margin: 10px 10px 10px 10px; border-radius: 10px; width: 220px; padding: 10px;cursor: pointer ">
+
+                <div style="font-size: 18px; float: left">
+                  <div style="font-size: 12px;font-weight: 600;"
+                  >{{item.name}}</div></div>
+                <div style="font-size: 12px; float: left; width: 100%">{{item.countryName}}</div>
+                <div style="width:200px; display: inline-block; line-height: 5px">
+                  <div style="display: flex; flex-direction: row">
+                    <div *ngFor="let starts of counter(5) ;let i = index" >
+                      <img *ngIf="i+1 <= item.rate" src="assets/staractive.png"  style="width:10px; "/>
+                      <img *ngIf="i+1 > item.rate" src="assets/starnoactive.png" style="width:10px;"/>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          <div *ngFor="let item of displayList"  >
+            <div *ngFor="let area of item.listAreas"  >
+            <div  (click)="callMarkerPop(area)" style="background-color: white;margin: 10px 10px 10px 10px; border-radius: 10px; width: 220px; padding: 10px;cursor: pointer ">
+
+              <div style="font-size: 18px; float: left">
+                <div style="font-size: 12px;font-weight: 600;"
+                >{{area.name}}</div></div>
+              <div style="font-size: 12px; float: left; width: 100%">{{item.name}}</div>
+              <div style="width:200px; display: inline-block; line-height: 5px">
+                <div style="display: flex; flex-direction: row">
+                  <div *ngFor="let starts of counter(5) ;let i = index" >
+                    <img *ngIf="i+1 <= item.rate" src="assets/staractive.png"  style="width:10px; "/>
+                    <img *ngIf="i+1 > item.rate" src="assets/starnoactive.png" style="width:10px;"/>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+          </div>
+
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Google Api" *ngIf="singleton.checkRole(9)"  >
+      <div style="width: 100%;overflow: no-display; height: calc(100vh - 135px);border-radius: 10px">
+      <div style=" margin-left: 50px ;overflow-x: auto;height: calc(100vh - 185px);display: flex;flex-direction: column;flex-wrap: wrap;">
+        <mat-checkbox class="example-margin" [(ngModel)]="allchecked" (change)="setAll($event)" >All</mat-checkbox>
+      <div class="example-section" style="display: flex;flex-direction: column;flex-wrap: wrap;" *ngFor="let city of singleton.listCity">
+
+    <mat-checkbox class="example-margin"  (change)="setAllCity($event, city.id)" [checked]="city.checked"
+                  >{{city.name}}</mat-checkbox>
+
+    <div *ngFor="let area of city.listAreas" style="margin-left: 20px;display: flex;flex-direction: column;flex-wrap: wrap;">
+      <mat-checkbox class="example-margin-area"  [(ngModel)]="area.checked">{{area.name}}</mat-checkbox>
+
+    </div>
+      </div>
+      </div>
+        <div  *ngIf="singleton.runGoogleApi">
+        <mat-progress-bar  mode="indeterminate" color="#3c8dbc" style="margin-top:-10px; margin-left:10%;width: 80%; margin-right:10%;background-color: #3c8dbc;height: 3px; z-index: 9999;opacity: 0.5"></mat-progress-bar>
+        </div>
+        <button class="btn-style" #btn style="background-color: #5663FF; margin-left: 10px;font-size: 12px; margin-right: 40px; float: right;color: white"
+                (click)="runGoogleApi()" [ngStyle]="{'opacity': checkCities() && singleton.checkRole(10)  ? '1' : '0.5'}"
+                [disabled]="!checkCities() || !singleton.checkRole(10)"
+                mat-button>Update</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div *ngIf="indexTab === 1 && map && map.getCenter() && singleton.checkRole(6)" style="position: absolute; right: 150px; top: 10px">
+  <div style="font-size: 10px;color: #aaa">lat: {{this.map.getCenter().lat}}</div>
+  <div style="font-size: 10px;color: #aaa">lng: {{this.map.getCenter().lng}}</div>
+</div>
+  <button *ngIf="indexTab === 1 && singleton.checkRole(6)" class="btn-style"  style="background-color: #5663FF;position: absolute;font-size: 12px;   right: 50px; top: 10px;color: white;z-index: 9999"
+          (click)="addArea()" [ngStyle]="{'opacity': singleton.checkRole(6)  ? '1' : '0.5'}"
+          [disabled]="!singleton.checkRole(6)"
+          mat-button>Add Area</button>
+</div>

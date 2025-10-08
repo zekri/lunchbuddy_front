@@ -1,0 +1,31 @@
+<img style="object-fit: cover ; width: 100%;height: 100%; position: absolute;top:0px; opacity: 0.2" src="https://st3.depositphotos.com/16357130/18575/i/450/depositphotos_185753858-stock-photo-close-up-of-people-hands.jpg" />
+
+<mat-toolbar style="background-color: #fff;box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+  <button mat-mini-fab color="#5663FF" style="height: 35px; width: 35px;background-color:#5663FF ;z-index: 9999" (click)="onDraw()" >
+    <mat-icon style="margin-top: -5px; color: white">menu</mat-icon>
+  </button>
+
+
+  <span style="margin-top: 3px; margin-left:-20px;padding-left: 32px;padding-right: 21px;border-radius: 0px 12px 12px 0px; font-size: 15px;background-color: rgba(0,0,0,0.05); color: #5663FF">{{singleton.titleHeader}}</span>
+  <span class="example-spacer"></span>
+  <button mat-mini-fab color="primary" style="background-color: #5663FF;width:30px; height:30px;">
+    <mat-icon [matTooltip]="tooltipRefresh" class="example-icon" style="font-size: 17px; margin-top: -2px;color: white;" aria-hidden="false"
+              aria-label="Example heart icon" (click)="refresh()">refresh
+    </mat-icon>
+  </button>
+
+  <button mat-mini-fab color="primary" style="background-color: #5663FF;width:30px; height:30px;right: -5px" [matMenuTriggerFor]="appMenu" >
+    <mat-icon class="example-icon" style="font-size: 17px; margin-top: -2px; color: white;" aria-hidden="false" aria-label="Example delete icon">
+      more_vert
+    </mat-icon>
+  </button>
+  <mat-menu #appMenu="matMenu" yPosition="above" style="padding-left: 10px; padding-right: 10px">
+    <mat-icon  style="width: 100%; display: flex; justify-content: center; font-size: 30px;color: gray"  aria-label="Example heart icon">account_circle</mat-icon>
+    <div *ngIf="singleton.me && singleton.me.login !== null" style="display: flex; justify-content: center; font-weight: 500;margin-top: 5px">{{singleton.me.login}}</div>
+     <div *ngIf="singleton.me && singleton.me.profileName !== null" style="display: flex; justify-content: center;align-content: center; font-size: 12px;max-width: 150px; text-align: center">{{singleton.me.profileName}}</div>
+    <button mat-menu-item  (click)="logOut()">
+      <mat-icon class="example-icon" style="color: #ff0000;">power_settings_new </mat-icon>
+      Deconnection</button>
+  </mat-menu>
+
+</mat-toolbar>

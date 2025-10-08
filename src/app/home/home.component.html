@@ -1,0 +1,61 @@
+
+<app-header (toggleClicked)="drawer.toggle()" ></app-header>
+<mat-drawer-container class="example-container" autosize style="border: 0px; margin:10px; margin-top:7px;border-radius: 10px">
+  <mat-drawer  #drawer  mode="over" style="min-width: 200px">
+    <Div style="display:flex; flex-direction: column; width: 100%" class="example-sidenav">
+      <div style="display: flex; height: 2px;background-color: #5663FF"></div>
+      <button *ngIf="singleton.checkRole(58)" mat-menu-item color="primary" (click)="goToScreen('')"  style="margin-top: 20px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Dashbord'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Dashbord'  ? 'white' : 'gray'}" aria-label="Example heart icon">view_array</mat-icon>
+        <div  style="height: 50px;  margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Dashbord'  ? 'white' : '#333'}" >Dashbord </div>
+      </button>
+
+      <button *ngIf="singleton.checkRole(4)" mat-menu-item color="primary" (click)="goToScreen('city')"  style="margin-top: 10px; display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Cities'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}" >
+          <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Cities'  ? 'white' : 'gray'}"  aria-label="Example heart icon">location_city</mat-icon>
+          <div  style="height: 50px;  margin-top: -4px;margin-left: 0px" [ngStyle]="{'color': singleton.titleHeader ==='Cities'  ? 'white' : '#333'}">Cities </div>
+      </button>
+
+      <button *ngIf="singleton.checkRole(14)"  mat-menu-item color="primary" (click)="goToScreen('restaurant')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Restaurants'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Restaurants'  ? 'white' : 'gray'}" aria-label="Example heart icon">restaurant</mat-icon>
+        <div  style="height: 50px;  margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Restaurants'  ? 'white' : '#333'}">Restaurants </div>
+      </button>
+
+   <!--   <button  mat-menu-item color="primary" (click)="goToScreen('cafe')"  style="margin-top: 10px;display:flex;flex: 1; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Cafes'  ? '#5663FF' : 'rgba(238, 238, 238,0.5)'}">
+        <mat-icon class="example-icon" style="margin-top: 15px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Cafes'  ? 'white' : 'gray'}" aria-label="Example heart icon">local_cafe</mat-icon>
+        <div  style="height: 50px; padding-top: 15px;margin-left: 20px"  [ngStyle]="{'color': singleton.titleHeader ==='Cafes'  ? 'white' : '#333'}">Cafes </div>
+      </button> -->
+
+      <button *ngIf="singleton.checkRole(54)"  mat-menu-item color="primary" (click)="goToScreen('socialUser')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Social Users'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Social Users'  ? 'white' : 'gray'}" aria-label="Example heart icon">account_circle</mat-icon>
+        <div  style="height: 50px;  margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Social Users'  ? 'white' : '#333'}">Social Users </div>
+      </button>
+
+      <button *ngIf="singleton.checkRole(49)" mat-menu-item color="primary" (click)="goToScreen('event')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Events'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Events'  ? 'white' : 'gray'}" aria-label="Example heart icon">event_note</mat-icon>
+        <div  style="height: 50px;  margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Events'  ? 'white' : '#333'}">Events </div>
+      </button>
+      <button *ngIf="singleton.checkRole(16)" mat-menu-item color="primary" (click)="goToScreen('definition')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Definitions'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Definitions'  ? 'white' : 'gray'}" aria-label="Example heart icon">view_array</mat-icon>
+        <div  style="height: 50px; margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Definitions'  ? 'white' : '#333'}" >Defenitions </div>
+      </button>
+
+      <div style="display: flex; height: 2px;margin-top: 20px; margin-bottom:10px;background-color: #5663FF"></div>
+
+      <button *ngIf="singleton.checkRole(45)" mat-menu-item color="primary" (click)="goToScreen('profile')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Profiles'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Profiles'  ? 'white' : 'gray'}" aria-label="Example heart icon">accessibility_new</mat-icon>
+        <div  style="height: 50px; margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Profiles'  ? 'white' : '#333'}" >Profiles </div>
+      </button>
+      <button *ngIf="singleton.checkRole(40)" mat-menu-item color="primary" (click)="goToScreen('user')"  style="margin-top: 10px;display:flex;height: 40px; flex-direction: row; justify-content: flex-start; align-content: center; border-radius: 20px; border: 0px" [ngStyle]="{'background-color': singleton.titleHeader ==='Users'  ? '#5663FF' : 'rgba(238, 238, 238,0)'}">
+        <mat-icon class="example-icon" style="margin-top: 10px; margin-left: 10px; font-size: 20px;" [ngStyle]="{'color': singleton.titleHeader ==='Users'  ? 'white' : 'gray'}" aria-label="Example heart icon">person</mat-icon>
+        <div  style="height: 50px;  margin-top: -4px;margin-left: 0px"  [ngStyle]="{'color': singleton.titleHeader ==='Users'  ? 'white' : '#333'}" >Users </div>
+      </button>
+
+
+
+
+    </Div>
+  </mat-drawer>
+
+  <router-outlet ></router-outlet>
+
+</mat-drawer-container>
+

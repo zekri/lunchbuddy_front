@@ -1,0 +1,383 @@
+<div class="bgloader" *ngIf="loader">
+  <div style="background-color: black; opacity: 0.2; width: 100%; height: 100%; position: absolute; z-index: 9999"></div>
+  <mat-progress-bar mode="indeterminate" color="#3c8dbc" style="background-color: #3c8dbc;height: 3px; z-index: 9999;opacity: 0.5"></mat-progress-bar>
+</div>
+<div class="bgdiv" >
+  <mat-tab-group style="flex: 1;background-color: #fff;  border-radius: 7px;height: 100%" >
+    <mat-tab label="Interests" *ngIf="singleton.checkRole(17)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(18)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New category</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newInterestCategory" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveInterestCategory()" [ngStyle]="{'opacity': newInterestCategory.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newInterestCategory.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsInterestCategory"
+              [defaultColDef]="defaultColDefInterestCategory"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionInterestCategory"
+              [rowGroupPanelShow]="rowGroupPanelShowInterestCategory"
+              [pivotPanelShow]="pivotPanelShowInterestCategory"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataInterestCategory"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsInterestCategory"
+              (gridReady)="onGridReadyInterestCategory($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 2;">
+          <div *ngIf="singleton.checkRole(20)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>Category</mat-label>
+              <mat-select [(value)]="selectedInterestCategory" >
+                <div *ngFor="let item of rowDataInterestCategory">
+                  <mat-option   value="{{item.idInterestCategory}}">{{item.name}}</mat-option>
+                </div>
+
+              </mat-select>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New interest</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newInterest" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>Image</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newInterestImage" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveInterest()" [ngStyle]="{'opacity': newInterest.length > 0 && selectedInterestCategory.length > 0 && newInterestImage.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newInterest.length === 0 || selectedInterestCategory.length === 0 || newInterestImage.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsInterest"
+              [defaultColDef]="defaultColDefInterest"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionInterest"
+              [rowGroupPanelShow]="rowGroupPanelShowInterest"
+              [pivotPanelShow]="pivotPanelShowInterest"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataInterest"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsInterest"
+              (gridReady)="onGridReadyInterest($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Look For" *ngIf="singleton.checkRole(22)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(23)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New category</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newLookForCategory" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveLookForCategory()" [ngStyle]="{'opacity': newLookForCategory.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newLookForCategory.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsLookForCategory"
+              [defaultColDef]="defaultColDefLookForCategory"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionLookForCategory"
+              [rowGroupPanelShow]="rowGroupPanelShowLookForCategory"
+              [pivotPanelShow]="pivotPanelShowLookForCategory"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataLookForCategory"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsLookForCategory"
+              (gridReady)="onGridReadyLookForCategory($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 2;">
+          <div *ngIf="singleton.checkRole(25)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>Category</mat-label>
+              <mat-select [(value)]="selectedLookForCategory" >
+                <div *ngFor="let item of rowDataLookForCategory">
+                  <mat-option   value="{{item.idLookForCategory}}">{{item.name}}</mat-option>
+                </div>
+
+              </mat-select>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New Look for</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newLookFor" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>Image</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newLookForImage" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveLookFor()" [ngStyle]="{'opacity': newLookFor.length > 0 && newLookForImage.length > 0 && selectedLookForCategory.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newLookFor.length === 0 || newLookForImage.length === 0 || selectedLookForCategory.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsLookFor"
+              [defaultColDef]="defaultColDefLookFor"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionLookFor"
+              [rowGroupPanelShow]="rowGroupPanelShowLookFor"
+              [pivotPanelShow]="pivotPanelShowLookFor"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataLookFor"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsLookFor"
+              (gridReady)="onGridReadyLookFor($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Languages" *ngIf="singleton.checkRole(27)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(28)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New language</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newLanguage" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>Image</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newLanguageImage" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveLanguage()" [ngStyle]="{'opacity': newLanguage.length > 0 && newLanguageImage.length >0 ? '1' : '0.5'}"
+                    [disabled]="newLanguage.length === 0 || newLanguageImage.length===0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsLanguage"
+              [defaultColDef]="defaultColDefLanguage"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionLanguage"
+              [rowGroupPanelShow]="rowGroupPanelShowLanguage"
+              [pivotPanelShow]="pivotPanelShowLanguage"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataLanguage"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsLanguage"
+              (gridReady)="onGridReadyLanguage($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 1;">
+
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Professions" *ngIf="singleton.checkRole(30)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(31)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New profession</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newProfession" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveProfession()" [ngStyle]="{'opacity': newProfession.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newProfession.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsProfession"
+              [defaultColDef]="defaultColDefProfession"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionProfession"
+              [rowGroupPanelShow]="rowGroupPanelShowProfession"
+              [pivotPanelShow]="pivotPanelShowProfession"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataProfession"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsProfession"
+              (gridReady)="onGridReadyProfession($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 2;">
+
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Cuisines" *ngIf="singleton.checkRole(33)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(34)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New Cuisine</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newCuisine" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px; background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveCuisine()" [ngStyle]="{'opacity': newCuisine.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newCuisine.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsCuisine"
+              [defaultColDef]="defaultColDefCuisine"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionCuisine"
+              [rowGroupPanelShow]="rowGroupPanelShowCuisine"
+              [pivotPanelShow]="pivotPanelShowCuisine"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataCuisine"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsCuisine"
+              (gridReady)="onGridReadyCuisine($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 2;">
+
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Dietary" *ngIf="singleton.checkRole(36)">
+      <div style="width: 100%;height: 100%; display: flex; flex-direction: row">
+        <div style="flex: 1">
+          <div *ngIf="singleton.checkRole(37)" style="display: flex; width: 100%;margin-bottom: 10px; margin-top: 10px">
+            <mat-form-field appearance="fill" style="height: 45px; margin-left: 5px;margin-right: 10px; width: 100%">
+              <mat-label>New dietary</mat-label>
+              <input matInput  type="text"  [(ngModel)]="newDietary" required>
+
+            </mat-form-field>
+            <button class="btn-style" #btn style="margin-top: 5px;background-color: #5663FF;height: 40px;  margin-right: 5px; float: right;color: white"
+                    (click)="saveDietary()" [ngStyle]="{'opacity': newDietary.length > 0  ? '1' : '0.5'}"
+                    [disabled]="newDietary.length === 0"
+                    mat-button>Save</button>
+          </div>
+          <div style="   height: calc(100vh - 230px);;overflow: auto;padding: 4px"  >
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 100%;border-radius: 5px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefsDietary"
+              [defaultColDef]="defaultColDefDietary"
+              [suppressRowClickSelection]="true"
+              [groupSelectsChildren]="true"
+              [debug]="true"
+              [rowSelection]="rowSelectionDietary"
+              [rowGroupPanelShow]="rowGroupPanelShowDietary"
+              [pivotPanelShow]="pivotPanelShowDietary"
+              [enableRangeSelection]="true"
+              [rowData]="rowDataDietary"
+              [rowHeight]="40"
+              [suppressMenuHide]="true"
+              [paginationAutoPageSize]="false"
+              [pagination]="true"
+              [frameworkComponents]="frameworkComponentsDietary"
+              (gridReady)="onGridReadyDietary($event)"
+
+            ></ag-grid-angular>
+          </div>
+        </div>
+        <div style="flex: 2;">
+
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

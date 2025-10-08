@@ -1,0 +1,216 @@
+<div class="divdialog"
+     style="display:block; min-width: 500px; min-height: 400px; border:0; border-radius: 7px">
+  <div style="margin-top: -1px; height: 50px;width: 100%; background-color: #5663FF">
+
+  </div>
+  <div
+    style="color: white; margin: 10px; font-size: 17px; white-space:nowrap; text-overflow: ellipsis; font-weight: 400; margin-right: 30px; position: absolute; top: 5px ">{{ title }}</div>
+  <mat-icon style="color: white; float: right;margin: 8px; right: 5px;  cursor: pointer; position: absolute; top: 5px"
+            mat-dialog-close>close
+  </mat-icon>
+  <div style="overflow-y: scroll;height: 620px;">
+    <mat-tab-group style="flex: 1;background-color: #fff;  border-radius: 7px;height: 100%">
+
+      <mat-tab label="Global">
+        <diV style="display: flex;flex-direction: row;align-items: self-start; margin-left: 20px;justify-content: start;  margin-right: 10px;border-radius: 0px 0px 20px 20px; ">
+          <img src="{{selectedSocialUser.picture}}" style="width: 70px; height: 70px;margin-top: 20px; object-fit: cover;border-radius: 150px;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+          <div style="margin-top: 20px; margin-left: 10px;display: flex; flex:1; align-self: center; flex-direction: column">
+            <div style=" align-content: center;font-size: 20px;font-weight: 400; top: 250px;
+color: #333;">{{selectedSocialUser.name}}</div>
+            <div *ngIf="selectedSocialUser.nameTitle" style="display: flex; font-size: 15px;font-weight: 400; color: black;color: gray; margin-right: 20px;margin-top: 5px; margin-bottom: 5px">
+              {{selectedSocialUser.nameTitle}}
+            </div>
+            <div *ngIf="selectedSocialUser.description" style="color: #ccc">
+              {{selectedSocialUser.description}}
+            </div>
+          </div>
+
+        </diV>
+
+      <!--  <div style="display: flex; flex-direction: row; justify-items: center; margin-top: 20px">
+          <div style="flex:1; display: flex; flex-direction: column; align-items: center;">
+            <div style="color:#5663FF">{{selectedSocialUser.listRestaurant.length}}</div>
+            <div style="font-size: 12px">Review</div>
+          </div>
+          <div style="height: 30px; width: 2px; background-color: #eee"></div>
+          <div style="flex:1; display: flex; flex-direction: column;align-items: center">
+            <div style="color:#5663FF">{{selectedSocialUser.listFollowers.length}}</div>
+            <div style="font-size: 12px">Followers</div>
+          </div>
+          <div style="height: 30px; width: 2px; background-color: #eee"></div>
+          <div style="flex:1; display: flex; flex-direction: column; align-items: center">
+            <div style="color:#5663FF">{{selectedSocialUser.listFollowing.length}}</div>
+            <div style="font-size: 12px">Following</div>
+          </div>
+        </div> -->
+
+
+
+        <div *ngIf="selectedSocialUser.listDietaries.length > 0" style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+          Dietary
+        </div>
+        <div *ngIf="selectedSocialUser.listDietaries.length > 0" style="margin-left: 20px; display: flex; flex-direction: row">
+          <div *ngFor="let item of selectedSocialUser.listDietaries" style="padding-left: 20px; padding-right: 20px; margin-right: 20px;padding-top: 10px; color: #555; height: 40px;border-radius: 30px; border: 1px solid #eee;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+            {{item.name}}
+          </div>
+        </div>
+
+        <div *ngIf="selectedSocialUser.listKitchen.length > 0" style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+          Cuisine
+        </div>
+        <div *ngIf="selectedSocialUser.listKitchen.length > 0" style="margin-left: 20px; display: flex; flex-direction: row">
+          <div *ngFor="let item of selectedSocialUser.listKitchen" style="padding-left: 20px; padding-right: 20px; margin-right: 20px;padding-top: 10px; color: #555; height: 40px;border-radius: 30px; border: 1px solid #eee;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+            {{item.name}}
+          </div>
+        </div>
+
+        <div *ngIf="selectedSocialUser.listInterest.length > 0" style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+          Interest
+        </div>
+        <div *ngIf="selectedSocialUser.listInterest.length > 0" style="margin-left: 20px; display: flex; flex-direction: row">
+          <div *ngFor="let item of selectedSocialUser.listInterest" style="padding-left: 20px; padding-right: 20px; margin-right: 20px;padding-top: 10px; color: #555; height: 40px;border-radius: 30px; border: 1px solid #eee;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+            {{item.image}} {{item.name}}
+          </div>
+        </div>
+
+        <div *ngIf="selectedSocialUser.listLookFor.length > 0" style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+          Look For
+        </div>
+        <div *ngIf="selectedSocialUser.listLookFor.length > 0" style="margin-left: 20px; display: flex; flex-direction: row">
+          <div *ngFor="let item of selectedSocialUser.listLookFor" style="padding-left: 20px; padding-right: 20px; margin-right: 20px;padding-top: 10px; color: #555; height: 40px;border-radius: 30px; border: 1px solid #eee;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+            {{item.image}} {{item.name}}
+          </div>
+        </div>
+
+        <div *ngIf="selectedSocialUser.listLanguage.length > 0" style="display: flex; font-size: 17px;font-weight: 500; color: black;margin-left: 20px; margin-right: 20px;margin-top: 20px; margin-bottom: 10px">
+          Language
+        </div>
+        <div *ngIf="selectedSocialUser.listLanguage.length > 0" style="margin-left: 20px; display: flex; flex-direction: row">
+          <div *ngFor="let item of selectedSocialUser.listLanguage" style="padding-left: 20px; padding-right: 20px; margin-right: 20px;padding-top: 10px; color: #555; height: 40px;border-radius: 30px; border: 1px solid #eee;
+box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)!important;">
+            {{item.image}}
+          </div>
+
+        </div>
+
+        <div style="height: 50px"></div>
+      </mat-tab>
+      <mat-tab label="Restaurant">
+        <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 100%;border-radius: 5px"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefsRestaurant"
+            [defaultColDef]="defaultColDefRestaurant"
+            [suppressRowClickSelection]="true"
+            [groupSelectsChildren]="true"
+            [debug]="true"
+            [rowSelection]="rowSelectionRestaurant"
+            [rowGroupPanelShow]="rowGroupPanelShowRestaurant"
+            [pivotPanelShow]="pivotPanelShowRestaurant"
+            [enableRangeSelection]="true"
+            [rowData]="rowDataRestaurant"
+            [rowHeight]="40"
+            [suppressMenuHide]="true"
+            [paginationAutoPageSize]="false"
+            [pagination]="true"
+            [frameworkComponents]="frameworkComponentsRestaurant"
+            (gridReady)="onGridReadyRestaurant($event)"
+
+          ></ag-grid-angular>
+        </div>
+      </mat-tab>
+      <mat-tab label="Followers">
+        <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 100%;border-radius: 5px"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefsFollowers"
+            [defaultColDef]="defaultColDefFollowers"
+            [suppressRowClickSelection]="true"
+            [groupSelectsChildren]="true"
+            [debug]="true"
+            [rowSelection]="rowSelectionFollowers"
+            [rowGroupPanelShow]="rowGroupPanelShowFollowers"
+            [pivotPanelShow]="pivotPanelShowFollowers"
+            [enableRangeSelection]="true"
+            [rowData]="rowDataFollowers"
+            [rowHeight]="40"
+            [suppressMenuHide]="true"
+            [paginationAutoPageSize]="false"
+            [pagination]="true"
+            [frameworkComponents]="frameworkComponentsFollowers"
+            (gridReady)="onGridReadyFollowers($event)"
+
+          ></ag-grid-angular>
+        </div>
+      </mat-tab>
+      <mat-tab label="Following">
+        <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 100%;border-radius: 5px"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefsFollowing"
+            [defaultColDef]="defaultColDefFollowing"
+            [suppressRowClickSelection]="true"
+            [groupSelectsChildren]="true"
+            [debug]="true"
+            [rowSelection]="rowSelectionFollowing"
+            [rowGroupPanelShow]="rowGroupPanelShowFollowing"
+            [pivotPanelShow]="pivotPanelShowFollowing"
+            [enableRangeSelection]="true"
+            [rowData]="rowDataFollowing"
+            [rowHeight]="40"
+            [suppressMenuHide]="true"
+            [paginationAutoPageSize]="false"
+            [pagination]="true"
+            [frameworkComponents]="frameworkComponentsFollowing"
+            (gridReady)="onGridReadyFollowing($event)"
+
+          ></ag-grid-angular>
+        </div>
+      </mat-tab>
+      <mat-tab label="Reviews">
+        <div style="width: 100%; height: 100%!important;overflow: auto;padding: 4px">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 100%;border-radius: 5px"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefsReviews"
+            [defaultColDef]="defaultColDefReviews"
+            [suppressRowClickSelection]="true"
+            [groupSelectsChildren]="true"
+            [debug]="true"
+            [rowSelection]="rowSelectionReviews"
+            [rowGroupPanelShow]="rowGroupPanelShowReviews"
+            [pivotPanelShow]="pivotPanelShowReviews"
+            [enableRangeSelection]="true"
+            [rowData]="rowDataReviews"
+            [rowHeight]="40"
+            [suppressMenuHide]="true"
+            [paginationAutoPageSize]="false"
+            [pagination]="true"
+            [frameworkComponents]="frameworkComponentsReviews"
+            (gridReady)="onGridReadyReviews($event)"
+
+          ></ag-grid-angular>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+
+  </div>
+
+</div>

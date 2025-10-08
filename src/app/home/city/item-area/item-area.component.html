@@ -1,0 +1,53 @@
+<div class="divdialog"
+     style="display:block; min-width: 600px; min-height: 200px; border:0; border-radius: 7px">
+  <div style="margin-top: -1px; height: 50px;width: 100%; background-color: #5663FF">
+
+  </div>
+  <div
+    style="color: white; margin: 10px; font-size: 17px; white-space:nowrap; text-overflow: ellipsis; font-weight: 400; margin-right: 30px; position: absolute; top: 5px ">{{ title }}</div>
+  <mat-icon style="color: white; float: right;margin: 8px; right: 5px;  cursor: pointer; position: absolute; top: 5px"
+            mat-dialog-close>close
+  </mat-icon>
+
+
+  <mat-progress-bar *ngIf="loader" mode="indeterminate" color="#5663FF" style="background-color: #3c8dbc">
+  </mat-progress-bar>
+  <div class="example-container" style="margin: 5px">
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>Area name</mat-label>
+      <input matInput type="text"  [(ngModel)]="selectedArea.name" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>City</mat-label>
+      <mat-select [(value)]="selectedCity" >
+        <div *ngFor="let city of singleton.listCity">
+        <mat-option   value="{{city.id}}">{{city.name}}</mat-option>
+        </div>
+      </mat-select>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>Latitude</mat-label>
+      <input matInput type="number" [(ngModel)]="selectedArea.lat" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>Longitude</mat-label>
+      <input matInput  type="number" [(ngModel)]="selectedArea.lng" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>Raduis</mat-label>
+      <input matInput  type="number" [(ngModel)]="selectedArea.radius" required>
+
+    </mat-form-field>
+  </div>
+
+  <button class="btn-style" style="background-color: #999; margin-left: 10px; margin-right: 170px;font-size: 12px; float: right"
+          (click)="preview()" mat-button>Cancel</button>
+  <button class="btn-style" #btn style="background-color: #5663FF; margin-left: 10px; margin-right: 40px;font-size: 12px; float: right;color: white"
+          (click)="save()" [ngStyle]="{'opacity': checkData()  ? '1' : '0.5'}"
+          [disabled]="!checkData()"
+          mat-button>Save</button>
+</div>
